@@ -84,7 +84,7 @@
         } else if (hasLoggedInIndex) {
             lastLogin = parseJiraDate(loginDetailsFull.substr(hasLoggedInIndex+LAST_LOGIN_TOKEN.length).trim());
         } else {
-            lastLogin = 'ERROR: '+loginDetailsFull.trim();
+            throw new Error('Unrecognized login cell contents: '+loginDetailsFull);
         }
 
         buffer += `"${fullname}"\t"${username}"\t"${lastLogin}"\n`;
