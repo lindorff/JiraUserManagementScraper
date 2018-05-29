@@ -61,6 +61,8 @@
     const LAST_FAILED_LOGIN_TOKEN = 'Last failed login:';
     const NEVER_LOGGED_IN_TOKEN = 'Never logged in';
 
+    const interestingGroups = window.prompt('Which user groups do you want to recognize in the results (separate with comma)?').split(',');
+
     /** @type HTMLTableElement */
     const userTable = document.querySelector('#user_browser_table');
     
@@ -69,6 +71,10 @@
         if (row.querySelector('th')) continue; // skip header rows
         const fullname = row.querySelector('[data-cell-type="fullname"]').textContent.trim();
         const username = row.dataset.user;
+
+        const groupsFullText = row.querySelector('[data-cell-type="user-groups"]').textContent.trim();
+        const groupsFragments = interestingGroups.map(group => groupsFullText.indexOf(group) !== -1 ? group : '');
+        const groupsBufferFragment = groupsFragments.join('\t');
 
         const loginDetailsFull = row.querySelector('[data-cell-type="login-details"]').textContent;
         const hasLoggedInIndex = loginDetailsFull.indexOf(LAST_LOGIN_TOKEN);
@@ -87,7 +93,7 @@
             throw new Error('Unrecognized login cell contents: '+loginDetailsFull);
         }
 
-        buffer += `${fullname}\t${username}\t${lastLogin}\n`;
+        buffer += `${fullname}\t${username}\t${lastLogin}\t${groupsBufferFragment}\n`;
     }
 
     copy(buffer);
