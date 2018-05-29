@@ -63,12 +63,12 @@
             date.setMilliseconds(0);
         }
 
-        const year = date.getFullYear();
-        const month = date.getMonth()+1;
-        const day = date.getDate();
-        const hours = date.getHours();
-        const minutes = date.getMinutes();
-        return `${year}-${zeroPad(month)}-${zeroPad(day)} ${zeroPad(hours)}:${zeroPad(minutes)}`;
+        const year    = date.getFullYear();
+        const month   = zeroPad(date.getMonth()+1);
+        const day     = zeroPad(date.getDate());
+        const hours   = zeroPad(date.getHours());
+        const minutes = zeroPad(date.getMinutes());
+        return `${year}-${month}-${day} ${hours}:${minutes}`;
     }
 
     let buffer = '';
