@@ -35,7 +35,7 @@
                 default: date.setDate(date.getDate()-getWeekdayDifference(relativeDay.toLowerCase())); break;
             }
 
-            let hoursNum = 0;
+            let hoursNum = parseInt(hours);
             if (ampm.toLowerCase() === 'pm') {
                 if (hours === '12') hoursNum = 12;
                 else hoursNum = parseInt(hours)+12;
