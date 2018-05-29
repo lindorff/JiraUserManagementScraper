@@ -30,6 +30,8 @@ function tests(getWeekdayDifference,zeroPad,parseJiraDate) {
     // parseJiraDate, definite dates
     assertEqualStrong(parseJiraDate("01/Feb/18 5:00 AM"),  "2018-02-01 05:00");
     assertEqualStrong(parseJiraDate("02/Jan/18 5:00 AM"),  "2018-01-02 05:00");
+    assertEqualStrong(parseJiraDate("01/Jan/18 1:00 AM"),  "2018-01-01 01:00");
+    assertEqualStrong(parseJiraDate("01/Jan/18 1:00 PM"),  "2018-01-01 13:00");
     assertEqualStrong(parseJiraDate("01/Jan/18 12:00 AM"), "2018-01-01 00:00", "12AM should be midnight");
     assertEqualStrong(parseJiraDate("01/Jan/18 12:00 PM"), "2018-01-01 12:00", "12PM should be noon");
 
