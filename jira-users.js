@@ -36,21 +36,21 @@
         if (str.indexOf('/') !== -1) 
             date = new Date(str);
         else {
-            const [relativeDay, time, ampm] = str.split(' ');
+            const [relativeDay, time, ampm] = str.toLowerCase().split(' ');
             const [hours, minutes] = time.split(':');
 
-            switch (relativeDay.toLowerCase()) {
+            switch (relativeDay) {
                 case 'today': break; // day is already correct
                 case 'yesterday': date.setDate(date.getDate()-1); break;
-                default: date.setDate(date.getDate()-getWeekdayDifference(relativeDay.toLowerCase(), today)); break;
+                default: date.setDate(date.getDate()-getWeekdayDifference(relativeDay, today)); break;
             }
 
             let hoursNum = parseInt(hours);
-            if (ampm.toLowerCase() === 'pm') {
+            if (ampm === 'pm') {
                 if (hours === '12') hoursNum = 12;
                 else hoursNum = parseInt(hours)+12;
             }
-            else if (ampm.toLowerCase() === 'am' && hours === "12") hoursNum = 0;
+            else if (ampm === 'am' && hours === "12") hoursNum = 0;
 
             date.setHours(hoursNum);
             date.setMinutes(parseInt(minutes));
