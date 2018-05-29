@@ -87,7 +87,7 @@
             throw new Error('Unrecognized login cell contents: '+loginDetailsFull);
         }
 
-        buffer += `"${fullname}"\t"${username}"\t"${lastLogin}"\n`;
+        buffer += `${fullname}\t${username}\t${lastLogin}\n`;
     }
 
     copy(buffer);
