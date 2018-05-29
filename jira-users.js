@@ -1,11 +1,15 @@
 (function(){
+    // if the script is run in Node, then we only run tests.
+    if (typeof process !== 'undefined') require('./tests')(getWeekdayDifference,zeroPad,parseJiraDate);
 
-    /** @param {string} str */
-    function getWeekdayDifference(str) {
+    /** 
+     * @param {string} target 
+     * @param {number} today
+     */
+    function getWeekdayDifference(target, today = new Date().getDay()) {
         const WEEKDAYS = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
-        const today = new Date().getDay();
-        const targetDay = WEEKDAYS.indexOf(str);
-        if (targetDay < 0) throw new Error('unable to find correct weekday for '+str);
+        const targetDay = WEEKDAYS.indexOf(target);
+        if (targetDay < 0) throw new Error('unable to find correct weekday for '+target);
         let difference = today-targetDay;
         while (difference < 0) difference += 7;
         while (difference > 6) difference -= 7;
@@ -17,17 +21,17 @@
         return (num < 10 ? '0' : '')+num;
     }
 
-    /** @param {string} str */
-    function parseJiraDate(str) {
-        /** @type Date */
-        let date = null;
+    /** 
+     * @param {string} str string to parse
+     * @param {Date} today date to use when comparing relative times
+     */
+    function parseJiraDate(str, today = new Date()) {
+        let date = new Date(today);
         if (str.indexOf('/') !== -1) 
             date = new Date(str);
         else {
             const [relativeDay, time, ampm] = str.split(' ');
             const [hours, minutes] = time.split(':');
-
-            date = new Date();
 
             switch (relativeDay.toLowerCase()) {
                 case 'today': break; // day is already correct
