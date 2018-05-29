@@ -38,12 +38,14 @@ function tests(getWeekdayDifference,zeroPad,parseJiraDate) {
     // parseJiraDate, relative dates
     assertEqualStrong(parseJiraDate("Today 1:00 PM", new Date('2018-01-01')), "2018-01-01 13:00", "'Today' not working properly");
     assertEqualStrong(parseJiraDate("Yesterday 1:00 PM", new Date('2018-01-02')), "2018-01-01 13:00", "'Yesterday' not working properly");
+    assertEqualStrong(parseJiraDate("Tuesday 1:00 PM", new Date('2018-02-01 12:00')), "2018-01-30 13:00"); 
+    assertEqualStrong(parseJiraDate("Tuesday 1:00 PM", new Date('2018-01-01 12:00')), "2017-12-26 13:00"); 
     
     // getWeekdayDifference
-    const MONDAY = 1;
-    assertEqualStrong(getWeekdayDifference('monday', MONDAY), 0);
-    assertEqualStrong(getWeekdayDifference('sunday', MONDAY), 1);
-    assertEqualStrong(getWeekdayDifference('tuesday', MONDAY), 6);
+    const MONDAY_DATE = new Date('2018-01-01');
+    assertEqualStrong(getWeekdayDifference('monday', MONDAY_DATE), 0);
+    assertEqualStrong(getWeekdayDifference('sunday', MONDAY_DATE), 1);
+    assertEqualStrong(getWeekdayDifference('tuesday', MONDAY_DATE), 6);
 
     console.log('All tests pass');
     process.exit(0);

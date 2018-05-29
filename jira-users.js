@@ -5,18 +5,23 @@
     /** 
      * @param {string} target 
      * @param {number} today
+     * @returns the number of day's difference between a weekday and a date
      */
-    function getWeekdayDifference(target, today = new Date().getDay()) {
+    function getWeekdayDifference(target, today = new Date()) {
+        const todayWeekDay = today.getDay();
         const WEEKDAYS = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
-        const targetDay = WEEKDAYS.indexOf(target);
-        if (targetDay < 0) throw new Error('unable to find correct weekday for '+target);
-        let difference = today-targetDay;
+        const targetWeekDay = WEEKDAYS.indexOf(target);
+        if (targetWeekDay < 0) throw new Error('unable to find correct weekday for '+target);
+        let difference = todayWeekDay-targetWeekDay;
         while (difference < 0) difference += 7;
         while (difference > 6) difference -= 7;
         return difference;
     }
 
-    /** @param {number} num */
+    /** 
+     * @param {number} num 
+     * @returns "num" in string format, padded to two characters
+     */
     function zeroPad(num) {
         return (num < 10 ? '0' : '')+num;
     }
@@ -24,6 +29,7 @@
     /** 
      * @param {string} str string to parse
      * @param {Date} today date to use when comparing relative times
+     * @returns "str", formatted as "YYYY-MM-DD HH:MM"
      */
     function parseJiraDate(str, today = new Date()) {
         let date = new Date(today);
@@ -36,7 +42,7 @@
             switch (relativeDay.toLowerCase()) {
                 case 'today': break; // day is already correct
                 case 'yesterday': date.setDate(date.getDate()-1); break;
-                default: date.setDate(date.getDate()-getWeekdayDifference(relativeDay.toLowerCase())); break;
+                default: date.setDate(date.getDate()-getWeekdayDifference(relativeDay.toLowerCase(), today)); break;
             }
 
             let hoursNum = parseInt(hours);
