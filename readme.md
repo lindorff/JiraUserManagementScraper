@@ -8,6 +8,6 @@ You'll get a prompt where you can specify which user groups you explicitly want 
 
 _Has only been tested to work on Chrome_
 
-# Testing
+## Testing
 
 To run the tests, just run `node jira-users.js` and the tests from `tests.js` will be run appropriately.
