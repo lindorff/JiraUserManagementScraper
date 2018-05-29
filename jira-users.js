@@ -71,7 +71,6 @@
         return `${year}-${month}-${day} ${hours}:${minutes}`;
     }
 
-    let buffer = '';
     const LAST_LOGIN_TOKEN = 'Last:';
     const LAST_FAILED_LOGIN_TOKEN = 'Last failed login:';
     const NEVER_LOGGED_IN_TOKEN = 'Never logged in';
@@ -81,6 +80,7 @@
     /** @type HTMLTableElement */
     const userTable = document.querySelector('#user_browser_table');
     
+    let buffer = '';
     for (let i=0; i<userTable.rows.length; i++) {
         const row = userTable.rows.item(i);
         if (row.querySelector('th')) continue; // skip header rows
