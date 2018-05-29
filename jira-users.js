@@ -2,6 +2,11 @@
     // if the script is run in Node, then we only run tests.
     if (typeof process !== 'undefined') require('./tests')(getWeekdayDifference,zeroPad,parseJiraDate);
 
+    if (typeof copy === 'undefined') {
+        window.alert('Your browser doesn\'t support the "copy" function. Try Chrome or Firefox');
+        return;
+    }
+
     /** 
      * @param {string} target 
      * @param {number} today
