@@ -8,6 +8,8 @@ You'll get a prompt where you can specify which user groups you explicitly want 
 
 _Has only been tested to work on Chrome_
 
+**Note:** (known bug) Chrome _might_ throw an error if the DevTools window is detached as a separate window instead of split from the main browser window.
+
 ## Testing
 
 To run the tests, just run `node jira-users.js` and the tests from `tests.js` will be run appropriately.
